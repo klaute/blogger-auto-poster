@@ -1,0 +1,12 @@
+services:
+  blogger-auto-poster:
+    build: .
+    container_name: blogger-auto-poster
+    restart: unless-stopped
+    volumes:
+      - ./config:/config:ro
+      - ./posts:/data
+      - ./credentials.json:/app/credentials.json:ro
+    environment:
+      TZ: Europe/Berlin
+    command: ["python", "-m", "src.blogger_auto_poster", "--config", "/config/config.yml", "--log-level", "INFO"]

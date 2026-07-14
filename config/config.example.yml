@@ -1,0 +1,60 @@
+blogger:
+  blog_id: "BLOGGER_BLOG_ID"
+  client_id: "GOOGLE_OAUTH_CLIENT_ID"
+  client_secret: "GOOGLE_OAUTH_CLIENT_SECRET"
+  refresh_token: "GOOGLE_OAUTH_REFRESH_TOKEN"
+
+posting:
+  input_dir: "/data/queue"
+  done_dir: "/data/done"
+  failed_dir: "/data/failed"
+  state_file: "/data/state.json"
+  order_file: "/data/order.txt"
+  # interval = last successful post + interval_seconds, weekly_schedule = posting.schedule weekday/time.
+  due_mode: "interval"
+  # 604800 seconds = one week between successful posts.
+  interval_seconds: 604800
+  # How often the long-running container wakes up to check whether a post is due.
+  check_interval_seconds: 3600
+  dry_run: true
+  dry_run_move_done: false
+  # draft = Blogger draft, live = publish immediately, scheduled = publish at posting.schedule time.
+  publish_mode: "draft"
+  schedule:
+    weekday: "friday"
+    time: "09:00"
+    timezone: "Europe/Berlin"
+  scan_recursive: true
+  ignore_dirs:
+    - "ignore"
+    - "backlog"
+  skip_files: []
+
+content:
+  markdown_extensions:
+    - "extra"
+    - "sane_lists"
+    - "toc"
+  footer_html: ""
+
+tracking:
+  # Tracks already created posts by local source_id and invisible HTML marker.
+  marker_prefix: "blogger-auto-poster-source-id"
+  remote_check_enabled: true
+  update_existing_on_change: true
+  remote_statuses:
+    - "draft"
+    - "live"
+    - "scheduled"
+  remote_max_pages_per_status: 10
+
+notifications:
+  pushover:
+    enabled: false
+    host: "pushover-app-server"
+    port: 8090
+    mode: "get"
+    token: "PUSHOVER_APP_TOKEN"
+    app_name: "Blogger Auto Poster"
+    dedupe_prefix: "blogger-auto-poster"
+    timeout_seconds: 10
