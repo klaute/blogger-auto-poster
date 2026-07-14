@@ -1,0 +1,1 @@
+"""Blogger auto poster package."""
