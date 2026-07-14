@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+
+# Real credentials stay local.
+config/config.yml
+config/config.yml*
+client_secret_*.json
+credentials.json
+credentials.*
+blogger-oauth-token.json
+pushover_credentials.txt
+
+# Runtime state and reports.
+posts/state.json
+posts/last-blogger-test-result.json
+posts/last-pushover-test-result.json
