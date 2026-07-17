@@ -10,6 +10,8 @@ The project is designed for a simple workflow:
 - create Blogger drafts, live posts, or scheduled posts
 - track uploaded posts locally so existing Blogger posts can be updated instead of duplicated
 
+This README describes the technical workflow, file layout, queue model, and scripts. Content and style rules for Codex-generated project articles live in [CODEX_BLOG_ARTICLE_GUIDELINES.md](CODEX_BLOG_ARTICLE_GUIDELINES.md).
+
 ## Repository Layout
 
 ```text
