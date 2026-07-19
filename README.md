@@ -269,6 +269,12 @@ Required fields:
 - `title`: Blogger post title.
 - `labels`: Blogger labels.
 
+The runtime only reads `title` and `labels` from post frontmatter. Do not add
+editorial status flags to Markdown frontmatter. They do not affect automatic
+queue processing and can create a false sense of safety. A Markdown file becomes
+active by being placed in `posts/queue/`; parked or ignored files belong in the
+folder-based workflow described below.
+
 Labels are stored in each Markdown file. The runtime config does not contain label rules and does not add labels automatically.
 
 Before real Blogger writes, the tool reads existing Blogger labels and aligns local label casing. Example: if Blogger already has `Smart Home` and the Markdown file contains `smart home`, the upload uses `Smart Home`. New labels are allowed.

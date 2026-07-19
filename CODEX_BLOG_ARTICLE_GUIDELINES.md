@@ -251,8 +251,6 @@ title: "Projektname: kurze verständliche Beschreibung"
 labels:
   - Projekt
   - ...
-status: review
-auto_labels: false
 ---
 
 # Projektname
@@ -453,7 +451,7 @@ Eine solche Einordnung ist nur zulässig, wenn der Autor sie ausdrücklich wüns
 
 Jede Datei benötigt vollständiges YAML-Frontmatter.
 
-Technisch verarbeitet der Auto-Poster laut README nur `title` und `labels` als Pflichtfelder. Die folgenden zusätzlichen Felder sind Codex-Konventionen für neu erzeugte oder grundlegend überarbeitete Artikel.
+Technisch verarbeitet der Auto-Poster laut README nur `title` und `labels` aus dem Frontmatter. Keine redaktionellen Status-Flags in Markdown-Dateien eintragen.
 
 Standard:
 
@@ -463,18 +461,18 @@ title: "Titel"
 labels:
   - Projekt
   - KI generiert
-status: review
-auto_labels: false
 ---
 ```
 
-## Status
+## Veröffentlichungsstatus
 
-- `review`: Standard für automatisch erzeugte Artikel
-- `ready`: nur setzen, wenn dies ausdrücklich angefordert wird
-- `ignore`: nicht veröffentlichen
+Der Veröffentlichungsstatus ist ordnerbasiert:
 
-Codex soll automatisch erzeugte Texte grundsätzlich mit `status: review` anlegen.
+- `posts/queue/`: aktiver Artikel, der Server darf ihn verarbeiten.
+- `posts/queue/backlog/`: geparkter Entwurf, der Server ignoriert ihn.
+- `posts/queue/ignore/`: ignoriertes Material, der Server ignoriert es.
+
+Frontmatter-Felder wie `status`, `ready`, `review`, `ignore` oder `auto_labels` nicht verwenden. Sie werden vom Server nicht ausgewertet und erzeugen Scheinsicherheit.
 
 ## Labels
 
@@ -675,7 +673,7 @@ Vor dem Erzeugen einer Markdown-Datei muss Codex prüfen:
 
 - Sind Secrets entfernt?
 - Sind interne Links entfernt und nur erlaubte öffentliche GitHub-/Okoyono-Gitea-Links gesetzt?
-- Ist `status: review` gesetzt?
+- Liegt die Datei im richtigen Ordner für ihren Veröffentlichungsstatus?
 - Sind passende Labels vorhanden?
 - Sind Umlaute korrekt?
 - Sind Bild- und Videopositionen gekennzeichnet?
@@ -735,4 +733,4 @@ Bei jedem Projekt:
 7. Keine Fakten oder Motive erfinden.
 8. Keine Marketing- oder Recruiter-Sprache verwenden.
 9. Markdown mit Frontmatter erzeugen.
-10. `status: review` setzen.
+10. Datei je nach Veröffentlichungsstatus in `posts/queue/`, `posts/queue/backlog/` oder `posts/queue/ignore/` ablegen.
